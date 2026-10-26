@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookBack | Community Book Exchange</title>
+  <meta name="description" content="BookBack - donate, exchange, and find secondhand books in your local community." />
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons (CDN) - used for small UI icons only, no extra JS frameworks -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Google Fonts: Lora (headings) + Inter (body) + IBM Plex Mono (labels/badges) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+  <!-- Our custom styles (always loaded AFTER Bootstrap so we can override it) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =============================
+       NAVIGATION BAR
+       ============================= -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bb-navbar">
+      <div class="container">
+        <a class="navbar-brand bb-brand" href="#home">
+          <i class="bi bi-book-half me-2"></i>BookBack
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bbNavMenu"
+                aria-controls="bbNavMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bbNavMenu">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item"><a class="nav-link bb-nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link bb-nav-link" href="#browse">Browse Books</a></li>
+            <li class="nav-item"><a class="nav-link bb-nav-link" href="#add-book">Add a Book</a></li>
+            <li class="nav-item"><a class="nav-link bb-nav-link" href="#footer">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- =============================
+         HERO SECTION
+         ============================= -->
+    <section id="home" class="bb-hero">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+          <!-- Left: headline, description, CTA -->
+          <div class="col-lg-6">
+            <span class="bb-eyebrow">A shelf that belongs to everyone</span>
+            <h1 class="bb-hero-title">Give your books<br>a second reader.</h1>
+            <p class="bb-hero-text">
+              BookBack connects students and neighbors so secondhand books find new homes
+              instead of gathering dust. List a book in minutes, or browse what your
+              community is sharing right now.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <a href="#add-book" class="btn btn-bb-primary btn-lg px-4">
+                <i class="bi bi-plus-circle me-2"></i>List a Book
+              </a>
+              <a href="#browse" class="btn btn-bb-outline btn-lg px-4">
+                Browse Listings
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: decorative "bookshelf" signature  -->
+          <div class="col-lg-6">
+            <div class="bb-shelf-visual" aria-hidden="true">
+              <div class="bb-spine" style="--h:78%; --c:var(--bb-cranberry);"><span>FICTION</span></div>
+              <div class="bb-spine" style="--h:92%; --c:var(--bb-pine);"><span>SCIENCE</span></div>
+              <div class="bb-spine" style="--h:65%; --c:var(--bb-gold);"><span>PREP</span></div>
+              <div class="bb-spine" style="--h:85%; --c:var(--bb-slate);"><span>ARTS</span></div>
+              <div class="bb-spine" style="--h:72%; --c:var(--bb-pine);"><span>HISTORY</span></div>
+              <div class="bb-spine" style="--h:95%; --c:var(--bb-cranberry);"><span>MATHS</span></div>
+              <div class="bb-spine" style="--h:60%; --c:var(--bb-gold);"><span>PREP</span></div>
+            </div>
+            <div class="bb-shelf-ledge" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================
+         BROWSE BOOKS SECTION
+         ============================= -->
+    <section id="browse" class="bb-section">
+      <div class="container">
+        <div class="bb-section-heading text-center">
+          <span class="bb-eyebrow">On the shelf</span>
+          <h2>Available Books</h2>
+          <p class="bb-section-sub">Every listing below is shared by someone in your community.</p>
+        </div>
+
+
+       
+        <div class="bb-filter-bar d-flex flex-wrap justify-content-center gap-2 mb-5" role="group" aria-label="Filter books by category">
+          <button type="button" class="btn bb-filter-btn active" data-filter="all">All</button>
+          <button type="button" class="btn bb-filter-btn" data-filter="fiction">Fiction</button>
+          <button type="button" class="btn bb-filter-btn" data-filter="science">Science</button>
+          <button type="button" class="btn bb-filter-btn" data-filter="entrance-prep">Entrance Prep</button>
+          <button type="button" class="btn bb-filter-btn" data-filter="class-10">Class 10</button>
+          <button type="button" class="btn bb-filter-btn" data-filter="engineering">Engineering</button>
+          <button type="button" class="btn bb-filter-btn" data-filter="other">Other</button>
+        </div>
+
+        <!--
+          #bookListingsGrid is populated dynamically by script.js, which
+          fetches GET http://localhost:3000/books from JSON Server and
+          clones #bookCardTemplate for each book. See script.js.
+        -->
+        <div class="row g-4" id="bookListingsGrid">
+          <p id="listingsStatus" class="text-center text-muted w-100">Loading books...</p>
+        </div>
+        <!-- end #bookListingsGrid -->
+
+        <!-- Template for a single book card. This is cloned by script.js for each book in the JSON Server database. -->    
+        <template id="bookCardTemplate">
+          <div class="col-sm-6 col-lg-4 book-card-col" data-category="">
+            <article class="bb-book-card">
+              <div class="bb-card-top">
+                <span class="bb-category-badge">Category</span>
+                <span class="bb-status-badge status-available">Available</span>
+              </div>
+              <div class="bb-book-icon"><i class="bi bi-book"></i></div>
+              <h3 class="book-title">Title</h3>
+              <p class="book-author mb-1"><i class="bi bi-person me-1"></i><span>Author</span></p>
+              <p class="book-donor text-muted small mb-3">Listed by <span class="donor-name">Donor</span></p>
+              <a href="#" class="btn btn-bb-outline btn-sm w-100 book-contact-btn">
+                <i class="bi bi-telephone me-1"></i>Contact Donor
+              </a>
+            </article>
+          </div>
+        </template>
+
+      </div>
+    </section>
+
+    <!-- =============================
+         ADD BOOK FORM SECTION
+         ============================= -->
+    <section id="add-book" class="bb-section bb-section-alt">
+      <div class="container">
+        <div class="bb-section-heading text-center">
+          <span class="bb-eyebrow">Pass it forward</span>
+          <h2>List a Book</h2>
+          <p class="bb-section-sub">Fill in the details below and your book joins the shelf.</p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-7">
+            <div class="bb-form-card">
+
+              <!-- Alert placeholder for success/validation messages.
+                   . -->
+              <div id="formAlert" class="alert d-none" role="alert"></div>
+
+              <form id="addBookForm" novalidate>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="bookTitle" name="bookTitle" placeholder="Book Title" required>
+                  <label for="bookTitle">Book Title</label>
+                  <div class="invalid-feedback">Please enter the book title.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="author" name="author" placeholder="Author" required>
+                  <label for="author">Author</label>
+                  <div class="invalid-feedback">Please enter the author's name.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <select class="form-select" id="category" name="category" required>
+                    <option value="" selected disabled>Choose a category...</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="science">Science</option>
+                    <option value="entrance-prep">Entrance Prep</option>
+                    <option value="class-10">Class 10</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <label for="category">Subject / Category</label>
+                  <div class="invalid-feedback">Please choose a category.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="donorName" name="donorName" placeholder="Donor Name" required>
+                  <label for="donorName">Donor Name</label>
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+
+                <div class="form-floating mb-4">
+                  <input type="tel" class="form-control" id="contactNumber" name="contactNumber"
+                         placeholder="Contact Number" maxlength="10" required>
+                  <label for="contactNumber">Contact Number</label>
+                  <div class="invalid-feedback">Please enter a valid 10-digit contact number.</div>
+                </div>
+
+                <button type="submit" class="btn btn-bb-primary btn-lg w-100">
+                  <i class="bi bi-send-check me-2"></i>Submit Listing
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =============================
+       FOOTER
+       ============================= -->
+  <footer id="footer" class="bb-footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <a class="bb-brand bb-footer-brand" href="#home"><i class="bi bi-book-half me-2"></i>BookBack</a>
+          <p class="bb-footer-text mt-2">
+            A community shelf for secondhand books — built by students, for students.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h6 class="bb-footer-heading">Quick Links</h6>
+          <ul class="list-unstyled bb-footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#browse">Browse Books</a></li>
+            <li><a href="#add-book">Add a Book</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6 class="bb-footer-heading">Connect</h6>
+          <div class="bb-social-icons">
+            <a href="#" aria-label="Email us"><i class="bi bi-envelope"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="GitHub repository"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="bb-footer-divider">
+      <p class="bb-footer-copy text-center mb-0">&copy; 2026 BookBack. Built for the Full Stack Development course.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle (includes Popper, needed for navbar collapse) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Our custom script -->
+  <script src="script.js"></script>
+</body>
+</html>
+

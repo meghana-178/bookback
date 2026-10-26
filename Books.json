@@ -1,0 +1,67 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "category": "fiction",
+      "donorName": "Ananya Rao",
+      "contactNumber": "9876543210",
+      "status": "available"
+    },
+    {
+      "id": "2",
+      "title": "A Brief History of Time",
+      "author": "Stephen Hawking",
+      "category": "science",
+      "donorName": "Rohit Mehta",
+      "contactNumber": "9123456780",
+      "status": "available"
+    },
+    {
+      "id": "3",
+      "title": "Quantitative Aptitude for CAT",
+      "author": "Arun Sharma",
+      "category": "entrance-prep",
+      "donorName": "Priya Nair",
+      "contactNumber": "9988776655",
+      "status": "exchanged"
+    },
+    {
+      "id": "4",
+      "title": "NCERT Mathematics",
+      "author": "NCERT",
+      "category": "class-10",
+      "donorName": "Karthik Iyer",
+      "contactNumber": "9090909090",
+      "status": "available"
+    },
+    {
+      "id": "5",
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen",
+      "category": "engineering",
+      "donorName": "Sneha Kulkarni",
+      "contactNumber": "9871123456",
+      "status": "available"
+    },
+    {
+      "id": "6",
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "category": "other",
+      "donorName": "Vikram Singh",
+      "contactNumber": "9765432109",
+      "status": "available"
+    },
+    {
+      "title": "ikigai",
+      "author": "Héctor García and Francesc Miralles",
+      "category": "other",
+      "donorName": "Liz Furuya",
+      "contactNumber": "1234567890",
+      "status": "available",
+      "id": "fpUGfC8I6Hw"
+    }
+  ]
+}

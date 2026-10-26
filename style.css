@@ -1,0 +1,450 @@
+/* ==========================================================================
+   BookBack — style.css
+   ========================================================================== */
+
+:root {
+  /* ---- Color tokens ---- */
+  --bb-ink: #1b3b36;          /* deep pine green - primary/dark surfaces */
+  --bb-pine: #2f5d50;         /* lighter pine - accents/category */
+  --bb-paper: #f6f1e7;        /* aged paper - page background */
+  --bb-paper-alt: #efe7d8;    /* slightly darker paper - alt section bg */
+  --bb-gold: #c89b3c;         /* brass/gilt - primary accent, CTAs */
+  --bb-gold-dark: #a97f2c;
+  --bb-cranberry: #7a2e2e;    /* leather red - secondary accent */
+  --bb-slate: #5b6b6a;        /* muted teal-grey - "other" category */
+  --bb-text: #2b2622;         /* warm near-black - body text */
+  --bb-muted: #8a8272;        /* muted taupe - secondary text */
+  --bb-white: #ffffff;
+
+  /* ---- Type tokens ---- */
+  --bb-font-display: "Lora", Georgia, serif;
+  --bb-font-body: "Inter", system-ui, sans-serif;
+  --bb-font-mono: "IBM Plex Mono", monospace;
+}
+
+/* ---- Base ---- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--bb-font-body);
+  color: var(--bb-text);
+  background-color: var(--bb-paper);
+}
+
+h1, h2, h3, h4, .bb-brand {
+  font-family: var(--bb-font-display);
+  color: var(--bb-ink);
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+.bb-navbar {
+  background-color: var(--bb-ink);
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bb-brand {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--bb-gold) !important;
+  letter-spacing: 0.02em;
+}
+
+.bb-nav-link {
+  color: var(--bb-paper) !important;
+  font-weight: 500;
+  margin: 0 0.35rem;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.bb-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--bb-gold);
+  transition: width 0.25s ease;
+}
+
+.bb-nav-link:hover {
+  color: var(--bb-gold) !important;
+}
+
+.bb-nav-link:hover::after {
+  width: 100%;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.bb-hero {
+  padding: 6rem 0 5rem;
+  background: linear-gradient(180deg, var(--bb-paper) 0%, var(--bb-paper-alt) 100%);
+  overflow: hidden;
+}
+
+.bb-eyebrow {
+  display: inline-block;
+  font-family: var(--bb-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bb-cranberry);
+  background-color: rgba(122, 46, 46, 0.08);
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+.bb-hero-title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.bb-hero-text {
+  font-size: 1.1rem;
+  color: var(--bb-muted);
+  max-width: 34rem;
+}
+
+/* ---- Buttons ---- */
+.btn-bb-primary {
+  background-color: var(--bb-gold);
+  border: 1px solid var(--bb-gold);
+  color: var(--bb-ink);
+  font-weight: 600;
+  border-radius: 50px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-bb-primary:hover {
+  background-color: var(--bb-gold-dark);
+  border-color: var(--bb-gold-dark);
+  color: var(--bb-white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(200, 155, 60, 0.35);
+}
+
+.btn-bb-outline {
+  background-color: transparent;
+  border: 1.5px solid var(--bb-ink);
+  color: var(--bb-ink);
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+}
+
+.btn-bb-outline:hover {
+  background-color: var(--bb-ink);
+  color: var(--bb-paper);
+  transform: translateY(-2px);
+}
+
+/* ---- Signature visual: CSS "bookshelf" of spines ---- */
+.bb-shelf-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 320px;
+  padding: 0 1rem;
+}
+
+.bb-spine {
+  --h: 70%;
+  --c: var(--bb-pine);
+  width: 2.6rem;
+  height: var(--h);
+  background-color: var(--c);
+  border-radius: 6px 6px 3px 3px;
+  box-shadow: inset -4px 0 8px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.8rem;
+  transition: transform 0.25s ease;
+}
+
+.bb-spine:hover {
+  transform: translateY(-10px);
+}
+
+.bb-spine span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--bb-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.bb-shelf-ledge {
+  height: 16px;
+  max-width: 22rem;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #8a5a34 0%, #6e4526 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   SHARED SECTION STYLES
+   ========================================================================== */
+.bb-section {
+  padding: 5rem 0;
+}
+
+.bb-section-alt {
+  background-color: var(--bb-paper-alt);
+}
+
+.bb-section-heading {
+  max-width: 34rem;
+  margin: 0 auto 3rem;
+}
+
+.bb-section-heading h2 {
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.bb-section-sub {
+  color: var(--bb-muted);
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   FILTER BAR
+   ========================================================================== */
+.bb-filter-btn {
+  font-family: var(--bb-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+  background-color: var(--bb-white);
+  border: 1.5px solid var(--bb-paper-alt);
+  border-radius: 50px;
+  padding: 0.5rem 1.15rem;
+  transition: all 0.2s ease;
+}
+
+.bb-filter-btn:hover {
+  border-color: var(--bb-gold);
+}
+
+.bb-filter-btn.active {
+  background-color: var(--bb-ink);
+  border-color: var(--bb-ink);
+  color: var(--bb-gold);
+}
+
+/* ==========================================================================
+   BOOK CARDS
+   ========================================================================== */
+.bb-book-card {
+  position: relative;
+  background-color: var(--bb-white);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  height: 100%;
+  border-left: 6px solid var(--bb-slate);
+  box-shadow: 0 4px 14px rgba(27, 59, 54, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bb-book-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(27, 59, 54, 0.16);
+}
+
+/* Spine color coding — mirrors the hero shelf visual */
+.spine-fiction  { border-left-color: var(--bb-cranberry); }
+.spine-science  { border-left-color: var(--bb-pine); }
+.spine-prep     { border-left-color: var(--bb-gold); }
+.spine-other    { border-left-color: var(--bb-slate); }
+.spine-class    { border-left-color: var(--bb-gold-dark); }
+.spine-engineering { border-left-color: var(--bb-ink); }
+
+.bb-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.bb-category-badge {
+  font-family: var(--bb-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background-color: var(--bb-paper-alt);
+  color: var(--bb-ink);
+  padding: 0.25rem 0.6rem;
+  border-radius: 50px;
+}
+
+.bb-status-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 50px;
+}
+
+.status-available {
+  background-color: rgba(47, 93, 80, 0.12);
+  color: var(--bb-pine);
+}
+
+.status-exchanged {
+  background-color: rgba(122, 46, 46, 0.1);
+  color: var(--bb-cranberry);
+}
+
+.bb-book-icon {
+  font-size: 1.6rem;
+  color: var(--bb-gold);
+  margin-bottom: 0.75rem;
+}
+
+.book-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.book-author,
+.book-donor {
+  font-size: 0.9rem;
+  color: var(--bb-muted);
+}
+
+/* ==========================================================================
+   ADD BOOK FORM
+   ========================================================================== */
+.bb-form-card {
+  background-color: var(--bb-white);
+  border-radius: 16px;
+  padding: 2.25rem;
+  box-shadow: 0 12px 30px rgba(27, 59, 54, 0.1);
+}
+
+.form-control,
+.form-select {
+  border-radius: 10px;
+  border: 1.5px solid var(--bb-paper-alt);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--bb-gold);
+  box-shadow: 0 0 0 0.2rem rgba(200, 155, 60, 0.2);
+}
+
+/* Bootstrap's built-in validation states still apply (.is-valid / .is-invalid);
+   we only theme the focus ring above for consistency with the palette. */
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.bb-footer {
+  background-color: var(--bb-ink);
+  color: var(--bb-paper);
+  padding: 3.5rem 0 1.5rem;
+}
+
+.bb-footer-brand {
+  font-size: 1.3rem;
+  color: var(--bb-gold) !important;
+}
+
+.bb-footer-text {
+  color: rgba(246, 241, 231, 0.7);
+  font-size: 0.9rem;
+  max-width: 20rem;
+}
+
+.bb-footer-heading {
+  font-family: var(--bb-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bb-gold);
+  margin-bottom: 0.9rem;
+}
+
+.bb-footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.bb-footer-links a {
+  color: rgba(246, 241, 231, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.bb-footer-links a:hover {
+  color: var(--bb-gold);
+}
+
+.bb-social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(246, 241, 231, 0.3);
+  color: var(--bb-paper);
+  margin-right: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.bb-social-icons a:hover {
+  background-color: var(--bb-gold);
+  border-color: var(--bb-gold);
+  color: var(--bb-ink);
+}
+
+.bb-footer-divider {
+  border-color: rgba(246, 241, 231, 0.15);
+  margin: 2rem 0 1.25rem;
+}
+
+.bb-footer-copy {
+  color: rgba(246, 241, 231, 0.55);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE TWEAKS
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .bb-hero { padding: 3.5rem 0 3rem; text-align: center; }
+  .bb-hero-text { margin: 0 auto; }
+  .bb-shelf-visual { height: 220px; margin-top: 2rem; }
+}
+
+@media (max-width: 575.98px) {
+  .bb-form-card { padding: 1.5rem; }
+  .bb-spine { width: 1.9rem; }
+}
